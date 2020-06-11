@@ -52,7 +52,7 @@ type Contact = {
   }
 
   markAllasContacted () :void { //Isma
-
+    console.log('hola mundo')
   }
   
   
