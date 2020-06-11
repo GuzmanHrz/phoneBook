@@ -17,8 +17,14 @@ type Contact = {
   export class AppComponent {
   title = 'phoneBook';
   newContact : Contact = {name: "" ,  email: "" , phone: "",contacted: false};
-  contactList  : Array<Contact>  = [];
+  contactList  : Array<Contact>  = [
+    {name: "Isma" ,   email: "" , phone: "745253453",contacted: false},
+    {name: "Juan" ,   email: "" , phone: "245353245",contacted: false},
+    {name: "Angel" ,  email: "" , phone: "324543534",contacted: false}
+  ];
   errors : Array<string> = [];
+  editMode: boolean = false;
+  addMode: boolean = false;
 
   addContact( contact : Contact) : void   { //Ana
  
@@ -34,13 +40,11 @@ type Contact = {
     return false;
   }
 
-  markAscontacted( contact: Contact ) :void { //Isma
+  /* Isma */
+  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? contact[position].contacted = true : false )
+  markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => !contact.contacted ? contact[position].contacted = true : false )
 
-    return 
-
-  }
-
-/* esconder ya contactados */ // Ana
+  /* esconder ya contactados */ // Ana
 
   nameLongerThanSix( name: string ) :boolean { // Guzman
     return
@@ -50,11 +54,6 @@ type Contact = {
   deleteAll() :void { // Manu
 
   }
-
-  markAllasContacted () :void { //Isma
-    console.log('hola mundo')
-  }
-  
   
   /* Segunda Parte */
 
