@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 type Contact = {
+  id:               number;
   name:             string;
   email:            string;
   phone:            string;
@@ -12,45 +13,63 @@ type Contact = {
   styleUrls: ['./app.component.css']
 })
 
+
+
 /* Ana, Guzman, Manu, Isma
  */
   export class AppComponent {
   title = 'phoneBook';
-  newContact : Contact = {name: "" ,  email: "" , phone: "",contacted: false};
+  newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   contactList  : Array<Contact>  = [
-    {name: "Isma" ,   email: "" , phone: "745253453",contacted: false},
-    {name: "Juan" ,   email: "" , phone: "245353245",contacted: false},
-    {name: "Angel" ,  email: "" , phone: "324543534",contacted: false}
+    {id: 1, name: "Isma" ,   email: "" , phone: "745253453",contacted: false},
+    {id: 2, name: "Juan" ,   email: "" , phone: "245353245",contacted: true},
+    {id: 3, name: "Angel" ,  email: "" , phone: "324543534",contacted: false}
   ];
   errors : Array<string> = [];
   editMode: boolean = false;
   addMode: boolean = false;
+  idCounter: number = 3;
+
 
   addContact( contact : Contact) : void   { //Ana
- 
-    console.log(contact);
+    if(!this.isContactRepeated(contact) || this.nameLongerThanSix(contact.name) ){
+       contact.id = ++this.idCounter;
+
+      this.contactList.push(contact);
+
+      this.addMode = false;
+    }
+    
+    console.log(this.contactList);
 
   }
 
   deleteContact( contact: Contact) :void { //Guzman
 
+    this.contactList  = this.contactList.filter( listItem => listItem !== contact );
+
   }
 
-  isContactrepeated( contact: Contact) :boolean { //Manu
-    return false;
+  isContactRepeated ( contact: Contact) :boolean { 
+    return this.contactList.some(elementItem => elementItem.name == contact.name && elementItem.email == contact.email && elementItem.phone == contact.phone); //Manu
+     
   }
 
   /* Isma */
-  private isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
+
+  isContactedTwo(contact: Contact ){
+    return contact.contacted;
+
+  }
+  isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
   
   markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.isAlreadyContacted(contact.contacted, position) : false )
   markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => !contact.contacted ? this.contactList[position].contacted = true : false )
 
   /* esconder ya contactados */ // Ana
 
-  nameLongerThanSix( name: string ) :boolean { // Guzman
-    return
-
+  private nameLongerThanSix( contactName: string ) :boolean { // Guzman
+    return contactName.length > 6;
   }
 
   deleteAll() :void { // Manu
@@ -71,7 +90,14 @@ type Contact = {
 
   }
 
-  edit( contact: Contact) :void{ //Guzman
+  edit( contact: Contact ) :void{ //Guzman
+    
+    let originalContanct = this.contactList.find( itemList  => itemList.id === contact.id); 
+    originalContanct.name = contact.name;
+    originalContanct.email  =  contact.email;
+    originalContanct.phone = contact.phone;
+    originalContanct.contacted = contact.contacted;
+
 
   }
 
@@ -79,4 +105,9 @@ type Contact = {
 
   }
 
+  setAddMode() :void {
+    this.addMode = true;
+    this.newContact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
+
+  }
 }
