@@ -1,20 +1,57 @@
+<section class="main-contacts-content">
+  <div class="list-head">
+    <div>Contacts</div>
+    <div></div>
+    <div class="buttom-horizontal">
+      <button class="buttom buttom-none"><img src="assets/mas.svg" alt=""></button>
+      <button class="buttom buttom-none"><img src="assets/compartimiento.svg" alt=""></button>
+      <button class="buttom buttom-none"  (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
+    </div>
+  </div>
+  <div class="search-content">
+    <input type="text" placeholder="Search">
+    <img src="assets/buscar.svg" alt="">
+  </div>
+  <ul class="contacts-list">
+    <li *ngFor="let contact of contactList">
+      <div class="contact-info-content">
+        <div class="contact-img">
+          {{ contact.name[0].toLocaleUpperCase() }}
+        </div>
+        <div class="contact-info">
+          <h2>{{ contact.name }}</h2>
+          <h3>{{ contact.phone }}</h3>
+        </div>
+      </div>
+      <div></div>
+      <div class="buttom-horizontal">
+        <button class="buttom"><img src="assets/editar.svg" alt=""></button>
+        <button class="buttom"><img src="assets/compartimiento.svg" alt=""></button>
+        <button class="buttom" (click)="markAscontacted(contact.name)"><img [hidden]="(!contact.contacted)" src="assets/telefono-contactado.svg" alt=""> <img [hidden]="contact.contacted" src="assets/telefono.svg" alt=""></button>
+      </div>
+    </li>
+  </ul>
+</section>
 
-<h1>Phonebook</h1>
-<form action="#">
-  
-  <label for="name">Name: </label> <br>
-  <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name"> <br>
+<section class="add-contact-content" [ngStyle]="{ display: !addMode ? 'none' : 'flex'}">
+  <form class="contact-form" action="#">
+    <h2>ADD CONTACT</h2>
+    <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name" placeholder="Name">
+    <input type="text" id="email" name="email" [(ngModel)]="newContact.email" placeholder="Email">
+    <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
+    <label for="checkbox">
+      Contacted <input type="checkbox"  id="contacted" name="contacted" [(ngModel)]="newContact.contacted">
+    </label>
+    <button (click)="addContact(newContact)">ADD NEW CONTACT</button>
+  </form>
+</section>
 
-  <label for="email">Email: </label> <br>
-  <input type="" id="email" name="email" [(ngModel)]="newContact.email"> <br>
-
-  <label for="phone">Telephone: </label> <br>
-  <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone"> <br>
-
-  <label for="checkbox"> Contacted: </label> 
-  <input type="checkbox"  id="contacted" name="contacted" [(ngModel)]="newContact.contacted"> <br><br>
-  
-  <input type="submit" value="submit" (click)="addContact(newContact)">
-
-</form>
-<h2>Estamos probando el comit by Ana</h2>
+<section class="edit-contact-content" [ngStyle]="{ display: !editMode ? 'none' : 'flex'}">
+  <form class="contact-form" action="#">
+    <h2>EDIT CONTACT</h2>
+    <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name" placeholder="Name">
+    <input type="text" id="email" name="email" [(ngModel)]="newContact.email" placeholder="Email">
+    <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
+    <button (click)="addContact(newContact)">EDIT CONTACT</button>
+  </form>
+</section>
