@@ -32,6 +32,11 @@
     height: 100%;
 }
 
+.main-contacts-content {
+    display: flex;
+    flex-direction: column;
+}
+
 .contacts-list {
    display: flex;
    flex-direction: column;
@@ -46,6 +51,7 @@
     background-color: white;
     margin-bottom: 5px;
     border-radius: 3px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0, .2);
 }
 
 .contact-info-content {
@@ -132,4 +138,28 @@
 .contact-form h2 {
     font-size: 1rem;
     margin-bottom: 16px;
+}
+
+.search-content {
+    display: flex;
+    position: relative;
+    padding: 7px 16px;
+    padding-bottom: 3px;
+}
+
+.search-content input {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid transparent;
+    padding: 9px 16px 9px 35px;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+}
+
+.search-content img {
+    display: flex;
+    position: absolute;
+    top: 18px;
+    left: 27px;
+    width: 15px;
+    height: 15px;
 }

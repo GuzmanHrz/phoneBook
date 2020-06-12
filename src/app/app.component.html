@@ -1,12 +1,16 @@
-<section>
+<section class="main-contacts-content">
   <div class="list-head">
     <div>Contacts</div>
     <div></div>
     <div class="buttom-horizontal">
       <button class="buttom buttom-none"><img src="assets/mas.svg" alt=""></button>
       <button class="buttom buttom-none"><img src="assets/compartimiento.svg" alt=""></button>
-      <button class="buttom buttom-none"><img src="assets/telefono-contactado.svg" alt=""></button>
+      <button class="buttom buttom-none"  (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
     </div>
+  </div>
+  <div class="search-content">
+    <input type="text" placeholder="Search">
+    <img src="assets/buscar.svg" alt="">
   </div>
   <ul class="contacts-list">
     <li *ngFor="let contact of contactList">
@@ -23,7 +27,7 @@
       <div class="buttom-horizontal">
         <button class="buttom"><img src="assets/editar.svg" alt=""></button>
         <button class="buttom"><img src="assets/compartimiento.svg" alt=""></button>
-        <button class="buttom"><img [hidden]="(!contact.contacted)" src="assets/telefono-contactado.svg" alt=""> <img [hidden]="contact.contacted" src="assets/telefono.svg" alt=""></button>
+        <button class="buttom" (click)="markAscontacted(contact.name)"><img [hidden]="(!contact.contacted)" src="assets/telefono-contactado.svg" alt=""> <img [hidden]="contact.contacted" src="assets/telefono.svg" alt=""></button>
       </div>
     </li>
   </ul>

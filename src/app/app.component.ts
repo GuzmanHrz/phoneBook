@@ -41,8 +41,10 @@ type Contact = {
   }
 
   /* Isma */
-  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? contact[position].contacted = true : false )
-  markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => !contact.contacted ? contact[position].contacted = true : false )
+  private isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
+  
+  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.isAlreadyContacted(contact.contacted, position) : false )
+  markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => !contact.contacted ? this.contactList[position].contacted = true : false )
 
   /* esconder ya contactados */ // Ana
 
