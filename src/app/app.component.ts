@@ -57,14 +57,16 @@ type Contact = {
 
   /* Isma */
 
-  isContactedTwo(contact: Contact ){
-    return contact.contacted;
-
-  }
-  isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
+  /* 
+    Función que busca un contacto por nombre y si lo encuentra lo marca como contactado
+    @param string Nombre del contacto a buscar
+  */
+  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.contactList[position].contacted = true : false )
   
-  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.isAlreadyContacted(contact.contacted, position) : false )
-  markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => !contact.contacted ? this.contactList[position].contacted = true : false )
+  /* 
+    Función que recorre la lista de contactos y los marca todos como contactados
+  */
+  markAllasContacted = () :void => this.contactList.forEach((contact: Contact, position: number) => this.contactList[position].contacted = true )
 
   /* esconder ya contactados */ // Ana
 

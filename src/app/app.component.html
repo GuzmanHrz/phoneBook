@@ -3,10 +3,9 @@
     <div>Contacts</div>
     <div></div>
     <div class="buttom-horizontal">
-      <button (click)="setAddMode()">Añadir</button>
-      <button class="buttom buttom-none"><img src="assets/mas.svg" alt=""></button>
+      <button class="buttom buttom-none" (click)="setAddMode()"><img src="assets/mas.svg" alt=""></button>
       <button class="buttom buttom-none"><img src="assets/compartimiento.svg" alt=""></button>
-      <button class="buttom buttom-none"  (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
+      <button class="buttom buttom-none" (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
     </div>
   </div>
   <div class="search-content">
@@ -14,7 +13,7 @@
     <img src="assets/buscar.svg" alt="">
   </div>
   <ul class="contacts-list">
-    <li *ngFor="let contact of contactList">
+    <li *ngFor="let contact of contactList" [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}">
       <div class="contact-info-content" >
         <div class="contact-img">
           {{ contact.name[0].toLocaleUpperCase() }}
