@@ -27,8 +27,20 @@ type Contact = {
   addMode: boolean = false;
 
   addContact( contact : Contact) : void   { //Ana
+<<<<<<< Updated upstream
  
     console.log(contact);
+=======
+    if(!this.isContactRepeated(contact) || this.nameLongerThanSix() ){
+       contact.id = ++this.idCounter;
+
+      this.contactList.push(contact);
+
+      this.addMode = false;
+    }
+    
+    console.log(this.contactList);
+>>>>>>> Stashed changes
 
   }
 
@@ -48,9 +60,14 @@ type Contact = {
 
   /* esconder ya contactados */ // Ana
 
+<<<<<<< Updated upstream
   nameLongerThanSix( name: string ) :boolean { // Guzman
     return
 
+=======
+  nameLongerThanSix() :boolean { // Guzman
+    return this.newContact.name.length > 6;
+>>>>>>> Stashed changes
   }
 
   deleteAll() :void { // Manu
@@ -60,7 +77,7 @@ type Contact = {
   /* Segunda Parte */
 
   search( data: string){ //Ana
-
+      console.log(data);
   }
 
   searchByName(name: string){

@@ -9,7 +9,11 @@
     </div>
   </div>
   <div class="search-content">
+<<<<<<< Updated upstream
     <input type="text" placeholder="Search">
+=======
+    <input type="text" placeholder="Search" (keyup.enter)="search($event.target.value)">
+>>>>>>> Stashed changes
     <img src="assets/buscar.svg" alt="">
   </div>
   <ul class="contacts-list">
@@ -36,6 +40,7 @@
 <section class="add-contact-content" [ngStyle]="{ display: !addMode ? 'none' : 'flex'}">
   <form class="contact-form" action="#">
     <h2>ADD CONTACT</h2>
+    <span *ngIf="nameLongerThanSix()"></span>
     <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name" placeholder="Name">
     <input type="text" id="email" name="email" [(ngModel)]="newContact.email" placeholder="Email">
     <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
