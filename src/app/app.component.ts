@@ -21,18 +21,23 @@ type Contact = {
   title = 'phoneBook';
   newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   contactList  : Array<Contact>  = [
-    {id: 1, name: "Isma" ,   email: "" , phone: "745253453",contacted: false},
+    {id: 1, name: "Isma" ,   email: "isma@gmail.com" , phone: "745253453",contacted: false},
     {id: 2, name: "Juan" ,   email: "" , phone: "245353245",contacted: true},
-    {id: 3, name: "Angel" ,  email: "" , phone: "324543534",contacted: false}
+    {id: 3, name: "Angel" ,  email: "angelitoPimpam@hotmail.com" , phone: "324543534",contacted: false}
   ];
   errors : Array<string> = [];
   editMode: boolean = false;
   addMode: boolean = false;
   idCounter: number = 3;
+  searchOption : string = "name"; //Variable que nos permite conocer que checkbox esta marcado.By default: name.
+  contactSearch : Array<Contact> = []; //Array con contactos que cumplen con la búsqueda
+  activateSearch : String = "";
+  flagSearch : boolean = false;
+
 
 
   addContact( contact : Contact) : void   { //Ana
-    if(!this.isContactRepeated(contact) || this.nameLongerThanSix() ){
+    if(!this.isContactRepeated(contact) && this.nameLongerThanSix() ){
        contact.id = ++this.idCounter;
 
       this.contactList.push(contact);
@@ -81,15 +86,35 @@ type Contact = {
   /* Segunda Parte */
 
   search( data: string){ //Ana
-    
+    console.log(data);
+    console.log(this.searchOption);
+    if(this.searchOption == "name"){
+      this.searchByName(data);
+    }else if(this.searchOption == "email"){
+      this.searchByEmail(data);
+    }
+    console.log(this.contactSearch);
+    this.flagSearch = true;
   }
 
   searchByName(name: string){
+    this.contactSearch = this.contactList.filter(element => 
+      element.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
+      
+      if(this.contactSearch.length === 0){
+        this.activateSearch = "No hay coincidencias para la búsqueda por nombre";
+      }
 
   }
 
   searchByEmail(email:  string){
-
+    
+    this.contactSearch = this.contactList.filter(element => 
+      element.email.toLocaleLowerCase().includes(email.toLocaleLowerCase()));
+      
+      if(this.contactSearch.length == 0){
+        this.activateSearch = "No hay coincidencias para la búsqueda por email";
+      }
   }
 
   edit( contact: Contact ) :void{ //Guzman
