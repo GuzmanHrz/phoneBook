@@ -21,9 +21,9 @@ type Contact = {
   title = 'phoneBook';
   newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   contactList  : Array<Contact>  = [
-    {id: 1, name: "Isma" ,   email: "" , phone: "745253453",contacted: false},
-    {id: 2, name: "Juan" ,   email: "" , phone: "245353245",contacted: true},
-    {id: 3, name: "Angel" ,  email: "" , phone: "324543534",contacted: false}
+    {id: 1, name: "Ismael Rodriguez" ,   email: "isma@email.com" , phone: "745253453",contacted: false},
+    {id: 2, name: "Juan Campayo" ,   email: "Juan@email.com" , phone: "245353245",contacted: true},
+    {id: 3, name: "Angel Ramirez" ,  email: "Angel@email.com" , phone: "324543534",contacted: false}
   ];
   errors : Array<string> = [];
   editMode: boolean = false;
