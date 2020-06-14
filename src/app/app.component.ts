@@ -25,7 +25,7 @@ type Contact = {
   errors : Array<string> = [];
   editMode: boolean = false;
   addMode: boolean = false;
-  idCounter: number = this.contactList[this.contactList.length - 1].id === undefined ? 0 : this.contactList[this.contactList.length - 1].id ;
+  idCounter: number = this.contactList.length === 0 ? 0 : this.contactList[this.contactList.length - 1].id ;
  
 
   addContact( contact : Contact) : void   { //Ana
