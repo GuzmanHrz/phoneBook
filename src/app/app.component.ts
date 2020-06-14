@@ -31,8 +31,8 @@ type Contact = {
   idCounter: number = 3;
   searchOption : string = "name"; //Variable que nos permite conocer que checkbox esta marcado.By default: name.
   contactSearch : Array<Contact> = []; //Array con contactos que cumplen con la búsqueda
-  activateSearch : String = "";
-  flagSearch : boolean = false;
+  searchErrorMessage : String = ""; //String que se muestra si no se cumple 
+
 
 
 
@@ -86,23 +86,23 @@ type Contact = {
   /* Segunda Parte */
 
   search( data: string){ //Ana
-    console.log(data);
-    console.log(this.searchOption);
+    this.searchErrorMessage = "";
+
     if(this.searchOption == "name"){
       this.searchByName(data);
     }else if(this.searchOption == "email"){
       this.searchByEmail(data);
     }
-    console.log(this.contactSearch);
-    this.flagSearch = true;
+ 
   }
 
   searchByName(name: string){
+
     this.contactSearch = this.contactList.filter(element => 
       element.name.toLocaleLowerCase().includes(name.toLocaleLowerCase()));
-      
+    console.log(this.contactSearch);  
       if(this.contactSearch.length === 0){
-        this.activateSearch = "No hay coincidencias para la búsqueda por nombre";
+        this.searchErrorMessage = "No hay coincidencias para la búsqueda por nombre";
       }
 
   }
@@ -113,7 +113,7 @@ type Contact = {
       element.email.toLocaleLowerCase().includes(email.toLocaleLowerCase()));
       
       if(this.contactSearch.length == 0){
-        this.activateSearch = "No hay coincidencias para la búsqueda por email";
+        this.searchErrorMessage = "No hay coincidencias para la búsqueda por email";
       }
   }
 

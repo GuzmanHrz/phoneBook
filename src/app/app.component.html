@@ -21,7 +21,7 @@
     <img src="assets/buscar.svg" alt="">
   </form>
 
-  <ul class="contacts-list" *ngIf="contactSearch.length == 0 && activateSearch.length == 0 ">
+  <ul class="contacts-list" *ngIf="contactSearch.length == 0 && searchErrorMessage.length == 0 ">
     <li *ngFor="let contact of contactList" [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}">
       <div class="contact-info-content" >
         <div class="contact-img">
@@ -62,7 +62,7 @@
       </div>
     </li>
   </ul>
-  <h1 *ngIf="activateSearch.length > 0">{{activateSearch}}</h1>
+  <h1 *ngIf="searchErrorMessage.length > 0">{{searchErrorMessage}}</h1>
 </section>
 
 <section class="add-contact-content" [ngStyle]="{ display: !addMode ? 'none' : 'flex'}">

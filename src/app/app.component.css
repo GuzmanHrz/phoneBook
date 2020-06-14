@@ -144,9 +144,21 @@
 
 .search-content {
     display: flex;
+    flex-wrap: wrap;
     position: relative;
     padding: 7px 16px;
     padding-bottom: 3px;
+}
+
+.searchOptions{
+    display: flex;
+    flex-basis: 100%;
+}
+
+.searchOptions input[type="radio"]{
+    max-width: 11px;
+    margin-right: 5px;
+    box-shadow: none;
 }
 
 .search-content input {
