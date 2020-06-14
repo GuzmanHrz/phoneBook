@@ -21,35 +21,33 @@ type Contact = {
   title = 'phoneBook';
   newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   editedContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
-  contactList  : Array<Contact>  = [
-    {id: 1, name: "Ismael Rodriguez" ,   email: "isma@email.com" , phone: "745253453",contacted: false},
-    {id: 2, name: "Juan Campayo" ,   email: "Juan@email.com" , phone: "245353245",contacted: true},
-    {id: 3, name: "Angel Ramirez" ,  email: "Angel@email.com" , phone: "324543534",contacted: false}
-  ];
+  contactList  : Array<Contact> = localStorage.getItem('contactList') === null ? [] : JSON.parse (localStorage.getItem('contactList'));
   errors : Array<string> = [];
   editMode: boolean = false;
   addMode: boolean = false;
-  idCounter: number = 3;
-
+  idCounter: number = this.contactList[this.contactList.length - 1].id === undefined ? 0 : this.contactList[this.contactList.length - 1].id ;
+ 
 
   addContact( contact : Contact) : void   { //Ana
     if(!this.isContactRepeated(contact) && this.validNameLength(contact.name, 6)){ 
-       contact.id = ++this.idCounter;
+      contact.id = ++this.idCounter;
       this.contactList.push(contact);
+      localStorage.setItem('contactList', JSON.stringify(this.contactList));
       this.errors = [];
-
       this.addMode = false;
     }
-    
+
   }
 
   deleteContact( contact: Contact) :void { //Guzman
 
     this.contactList  = this.contactList.filter( listItem => listItem !== contact );
+    localStorage.setItem('contactList', JSON.stringify(this.contactList));
+
 
   }
 
-  isContactRepeated ( contact: Contact) :boolean { 
+  isContactRepeated ( contact: Contact) :boolean {  //Manu 
     if (this.contactList.some(elementItem => elementItem.name == contact.name && elementItem.email == contact.email && elementItem.phone == contact.phone)){
       this.errors.push("The contact is already in the list.")
       return true;   
@@ -78,10 +76,13 @@ type Contact = {
     } else {
       this.errors.push(`The name should have more than ${minimumLength} characters`);
       return false;
-  }
+    }
   }
 
   deleteAll() :void { // Manu
+
+    //localStorage.setItem('contactList', JSON.stringify(this.contactList));
+
 
   }
   
@@ -99,7 +100,7 @@ type Contact = {
 
   }
 
-    
+  
 
   edit(contact : Contact ) :void{ //Guzman
     if (this.validNameLength(contact.name, 6)){
@@ -107,13 +108,12 @@ type Contact = {
       this.contactList[contactPosition] = contact;
       this.editMode = false;
       this.errors = [];
+      localStorage.setItem('contactList', JSON.stringify(this.contactList));
+
      }
   }
 
-  /* saveInLocalStorage(contact: Contact) :void { //Guzman
-
-  }
- */
+ 
   setAddMode() :void {
     this.addMode = true;
     this.newContact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
@@ -124,5 +124,5 @@ type Contact = {
     this.editMode = true;
     this.editedContact = {...contact};
 
-  }
+  } 
 }
