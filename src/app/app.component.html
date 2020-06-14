@@ -45,6 +45,9 @@
     </label>
     <button (click)="addContact(newContact)">ADD NEW CONTACT</button>
   </form>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
 </section>
 
 <section class="edit-contact-content" [ngStyle]="{ display: !editMode ? 'none' : 'flex'}">
@@ -55,4 +58,7 @@
     <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
     <button (click)="addContact(newContact)">EDIT CONTACT</button>
   </form>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
 </section>

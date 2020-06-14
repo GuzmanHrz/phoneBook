@@ -32,16 +32,14 @@ type Contact = {
 
 
   addContact( contact : Contact) : void   { //Ana
-    if(!this.isContactRepeated(contact) || this.nameLongerThanSix(contact.name) ){
+    if(!this.isContactRepeated(contact) && this.validNameLength(contact.name, 6)){ 
        contact.id = ++this.idCounter;
-
       this.contactList.push(contact);
+      this.errors = [];
 
       this.addMode = false;
     }
     
-    console.log(this.contactList);
-
   }
 
   deleteContact( contact: Contact) :void { //Guzman
@@ -51,7 +49,10 @@ type Contact = {
   }
 
   isContactRepeated ( contact: Contact) :boolean { 
-    return this.contactList.some(elementItem => elementItem.name == contact.name && elementItem.email == contact.email && elementItem.phone == contact.phone); //Manu
+    if (this.contactList.some(elementItem => elementItem.name == contact.name && elementItem.email == contact.email && elementItem.phone == contact.phone)){
+      this.errors.push("The contact is already in the list.")
+      return true;   
+    }
      
   }
 
@@ -70,8 +71,13 @@ type Contact = {
 
   /* esconder ya contactados */ // Ana
 
-  private nameLongerThanSix( contactName: string ) :boolean { // Guzman
-    return contactName.length > 6;
+  private validNameLength( contactName: string, minimumLength: number ) :boolean { // Guzman
+    if ( contactName.length > minimumLength ) {
+      return true;
+    } else {
+      this.errors.push(`The name should have more than ${minimumLength} characters`);
+      return false;
+  }
   }
 
   deleteAll() :void { // Manu
