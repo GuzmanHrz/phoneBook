@@ -20,6 +20,7 @@ type Contact = {
   export class AppComponent {
   title = 'phoneBook';
   newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
+  editedContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   contactList  : Array<Contact>  = [
     {id: 1, name: "Ismael Rodriguez" ,   email: "isma@email.com" , phone: "745253453",contacted: false},
     {id: 2, name: "Juan Campayo" ,   email: "Juan@email.com" , phone: "245353245",contacted: true},
@@ -98,24 +99,30 @@ type Contact = {
 
   }
 
-  edit( contact: Contact ) :void{ //Guzman
     
-    let originalContanct = this.contactList.find( itemList  => itemList.id === contact.id); 
-    originalContanct.name = contact.name;
-    originalContanct.email  =  contact.email;
-    originalContanct.phone = contact.phone;
-    originalContanct.contacted = contact.contacted;
 
-
+  edit(contact : Contact ) :void{ //Guzman
+    if (this.validNameLength(contact.name, 6)){
+      let contactPosition = this.contactList.findIndex(contactIterator => contactIterator.id === contact.id);
+      this.contactList[contactPosition] = contact;
+      this.editMode = false;
+      this.errors = [];
+     }
   }
 
-  saveInLocalStorage(contact: Contact) :void { //Guzman
+  /* saveInLocalStorage(contact: Contact) :void { //Guzman
 
   }
-
+ */
   setAddMode() :void {
     this.addMode = true;
     this.newContact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
+
+  }
+
+  setEditMode(contact: Contact) :void { //Guzman
+    this.editMode = true;
+    this.editedContact = {...contact};
 
   }
 }
