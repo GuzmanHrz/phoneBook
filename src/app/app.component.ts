@@ -61,7 +61,8 @@ type Contact = {
     Función que busca un contacto por nombre y si lo encuentra lo marca como contactado
     @param string Nombre del contacto a buscar
   */
-  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.contactList[position].contacted = true : false )
+  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.isAlreadyContacted(contact.contacted, position) : false )
+  private isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
   
   /* 
     Función que recorre la lista de contactos y los marca todos como contactados
