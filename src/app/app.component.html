@@ -43,7 +43,7 @@
   </ul>
 
   <ul class="contacts-list" *ngIf="contactSearch.length > 0">
-    <li *ngFor="let contact of contactSearch" [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}">
+    <li *ngFor="let contact of contactSearch" >
       <div class="contact-info-content" >
         <div class="contact-img">
           {{ contact.name[0].toLocaleUpperCase() }}
