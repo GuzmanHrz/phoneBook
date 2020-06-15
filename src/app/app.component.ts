@@ -19,16 +19,26 @@ type Contact = {
  */
   export class AppComponent {
   title = 'phoneBook';
+  show : number = 0;
   newContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
   editedContact : Contact = {id: 0, name: "" ,  email: "" , phone: "",contacted: false};
-  contactList  : Array<Contact> = localStorage.getItem('contactList') === null ? [] : JSON.parse (localStorage.getItem('contactList'));
+  contactList  : Array<Contact> = [];
+  contactListFiltered : Array<Contact> = []
   errors : Array<string> = [];
   editMode: boolean = false;
   addMode: boolean = false;
   idCounter: number = this.contactList.length === 0 ? 0 : this.contactList[this.contactList.length - 1].id ;
+<<<<<<< HEAD
   searchOption : string = "name"; //Variable que nos permite conocer que checkbox esta marcado.By default: name.
   contactSearch : Array<Contact> = []; //Array con contactos que cumplen con la búsqueda
   searchErrorMessage : String = ""; //String que se muestra si no se cumple 
+=======
+ 
+  constructor () {
+    this.contactList = localStorage.getItem('contactList') === null ? [] : JSON.parse (localStorage.getItem('contactList'));
+    this.contactListFiltered = this.contactList;
+  }
+
 
   addContact( contact : Contact) : void   { //Ana
     if(!this.isContactRepeated(contact) && this.validNameLength(contact.name, 6)){ 
@@ -59,12 +69,26 @@ type Contact = {
 
   /* Isma */
 
+  showContacts() {
+    if (this.show === 0) {
+      this.contactListFiltered = this.contactList.filter( c => c.contacted)
+      this.show = 2
+    } else if (this.show === 2) {
+      this.contactListFiltered = this.contactList.filter( c => !c.contacted)
+      this.show = 3
+    } else if (this.show === 3) {
+      this.contactListFiltered = this.contactList
+      this.show = 0
+    }
+  }
+
   /* 
     Función que busca un contacto por nombre y si lo encuentra lo marca como contactado
     @param string Nombre del contacto a buscar
   */
-  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.contactList[position].contacted = true : false )
-  
+  markAscontacted = ( contactName: string ) :void => this.contactList.forEach((contact: Contact, position: number) => contact.name === contactName ? this.isAlreadyContacted(contact.contacted, position) : false )
+  private isAlreadyContacted = ( isContacted: boolean, position: number ) => !isContacted ? this.contactList[position].contacted = true : this.contactList[position].contacted = false
+
   /* 
     Función que recorre la lista de contactos y los marca todos como contactados
   */
