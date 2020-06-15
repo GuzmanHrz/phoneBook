@@ -20,9 +20,9 @@
     </div>
     <img src="assets/buscar.svg" alt="">
   </form>
-
   <ul class="contacts-list" *ngIf="contactSearch.length == 0 && searchErrorMessage.length == 0 ">
-    <li *ngFor="let contact of contactList" [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}">
+    <!-- Añadir un boton que habiilite  o desabilite este compoarammiento  [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}" -->
+    <li *ngFor="let contact of contactList" >
       <div class="contact-info-content" >
         <div class="contact-img">
           {{ contact.name[0].toLocaleUpperCase() }}
@@ -30,12 +30,12 @@
         <div class="contact-info">
           <h2>{{ contact.name }}</h2>
           <h3>{{ contact.phone }}</h3>
-          <h3>{{ contact.email }}</h3>
+          <h2>{{ contact.email }}</h2>
         </div>
       </div>
       <div></div>
       <div class="buttom-horizontal">
-        <button class="buttom"><img src="assets/editar.svg" alt=""></button>
+        <button class="buttom" (click)="setEditMode(contact)"><img src="assets/editar.svg" alt=""></button>
         <button class="buttom" (click)="deleteContact(contact)"><img src="assets/compartimiento.svg" alt=""></button>
         <button class="buttom" (click)="markAscontacted(contact.name)"><img [hidden]="(!contact.contacted)" src="assets/telefono-contactado.svg" alt=""> <img [hidden]="contact.contacted" src="assets/telefono.svg" alt=""></button>
       </div>
@@ -68,7 +68,6 @@
 <section class="add-contact-content" [ngStyle]="{ display: !addMode ? 'none' : 'flex'}">
   <form class="contact-form" action="#">
     <h2>ADD CONTACT</h2>
-    <span *ngIf="nameLongerThanSix()"></span>
     <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name" placeholder="Name">
     <input type="text" id="email" name="email" [(ngModel)]="newContact.email" placeholder="Email">
     <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
@@ -77,14 +76,23 @@
     </label>
     <button (click)="addContact(newContact)">ADD NEW CONTACT</button>
   </form>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
 </section>
 
 <section class="edit-contact-content" [ngStyle]="{ display: !editMode ? 'none' : 'flex'}">
   <form class="contact-form" action="#">
     <h2>EDIT CONTACT</h2>
-    <input  type="text" id="name"  name="name" [(ngModel)]="newContact.name" placeholder="Name">
-    <input type="text" id="email" name="email" [(ngModel)]="newContact.email" placeholder="Email">
-    <input  type="tel" id="phone" name="phone" [(ngModel)]="newContact.phone" placeholder="Telephone">
-    <button (click)="addContact(newContact)">EDIT CONTACT</button>
+    <input  type="text" id="name"  name="name" [(ngModel)]="editedContact.name"  placeholder="Name">
+    <input type="text" id="email" name="email" [(ngModel)]="editedContact.email" placeholder="Email">
+    <input  type="tel" id="phone" name="phone" [(ngModel)]="editedContact.phone" placeholder="Telephone">
+    <label for="checkbox">
+      Contacted <input type="checkbox"  id="contacted" name="contacted" [(ngModel)]="editedContact.contacted">
+    </label>
+    <button (click)="edit(editedContact)">EDIT CONTACT</button>
   </form>
+  <ul>
+    <li *ngFor="let error of errors">{{error}}</li>
+  </ul>
 </section>
