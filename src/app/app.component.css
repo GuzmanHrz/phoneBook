@@ -170,3 +170,16 @@ button img.big-img {
     height: 17px;
     width: 17px;
 }
+
+.errors-list {
+    padding: 16px;
+}
+
+.errors-list li {
+    background-color: rgb(243, 176, 176);
+    padding: 7px;
+    color: rgb(223, 48, 48);
+    border-radius: 2px;
+    margin-bottom: 5px;
+    font-size: 0.7rem;
+}

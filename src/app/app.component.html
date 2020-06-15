@@ -47,7 +47,7 @@
     </label>
     <button (click)="addContact(newContact)">ADD NEW CONTACT</button>
   </form>
-  <ul>
+  <ul class="errors-list">
     <li *ngFor="let error of errors">{{error}}</li>
   </ul>
 </section>
@@ -63,7 +63,7 @@
     </label>
     <button (click)="edit(editedContact)">EDIT CONTACT</button>
   </form>
-  <ul>
+  <ul class="errors-list">
     <li *ngFor="let error of errors">{{error}}</li>
   </ul>
 </section>
