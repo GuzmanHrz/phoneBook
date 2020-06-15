@@ -28,11 +28,10 @@ type Contact = {
   editMode: boolean = false;
   addMode: boolean = false;
   idCounter: number = this.contactList.length === 0 ? 0 : this.contactList[this.contactList.length - 1].id ;
-<<<<<<< HEAD
   searchOption : string = "name"; //Variable que nos permite conocer que checkbox esta marcado.By default: name.
   contactSearch : Array<Contact> = []; //Array con contactos que cumplen con la búsqueda
   searchErrorMessage : String = ""; //String que se muestra si no se cumple 
-=======
+
  
   constructor () {
     this.contactList = localStorage.getItem('contactList') === null ? [] : JSON.parse (localStorage.getItem('contactList'));
