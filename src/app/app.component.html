@@ -3,9 +3,10 @@
     <div>Contacts</div>
     <div></div>
     <div class="buttom-horizontal">
-      <button class="buttom buttom-none" (click)="setAddMode()"><img src="assets/mas.svg" alt=""></button>
-      <button class="buttom buttom-none"><img src="assets/compartimiento.svg" alt=""></button>
-      <button class="buttom buttom-none" (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
+      <button class="buttom" (click)="setAddMode()"><img src="assets/mas.svg" alt=""></button>
+      <button class="buttom" (click)="showContacts()"><img class="big-img" [hidden]="show != 3" src="assets/ojo.svg" alt=""><img class="big-img" [hidden]="show != 2" src="assets/ojo-visto.svg" alt=""><div class="big-img" [hidden]="show != 0">all</div></button>
+      <button class="buttom"><img src="assets/compartimiento.svg" alt=""></button>
+      <button class="buttom" (click)="markAllasContacted()"><img src="assets/telefono-contactado.svg" alt=""></button>
     </div>
   </div>
   <div class="search-content">
@@ -14,7 +15,7 @@
   </div>
   <ul class="contacts-list">
     <!-- Añadir un boton que habiilite  o desabilite este compoarammiento  [ngStyle]="{ display: contact.contacted ? 'none' : 'flex'}" -->
-    <li *ngFor="let contact of contactList" >
+    <li *ngFor="let contact of contactListFiltered" >
       <div class="contact-info-content" >
         <div class="contact-img">
           {{ contact.name[0].toLocaleUpperCase() }}

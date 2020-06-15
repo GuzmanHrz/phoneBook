@@ -165,3 +165,8 @@
     width: 15px;
     height: 15px;
 }
+
+button img.big-img {
+    height: 17px;
+    width: 17px;
+}
